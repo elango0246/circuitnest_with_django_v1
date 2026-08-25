@@ -16,11 +16,11 @@ DEBUG = os.environ.get('DJANGO_DEBUG', '1') == '1'
 
 ALLOWED_HOSTS = os.environ.get(
     'DJANGO_ALLOWED_HOSTS',
-    '127.0.0.1,localhost,testserver,circuitnest-with-django-v1.vercel.app'
+    '127.0.0.1,localhost,testserver,circuitnest.vercel.app'
 ).split(',')
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://circuitnest-with-django-v1.vercel.app',
+    'https://circuitnest.vercel.app',
 ]
 
 
