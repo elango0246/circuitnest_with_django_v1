@@ -12,7 +12,7 @@ SECRET_KEY = os.environ.get(
     'dev-only-change-me'
 )
 
-DEBUG = os.environ.get('DJANGO_DEBUG', '1') == '1'
+DEBUG = os.environ.get('DJANGO_DEBUG', '0') == '1'
 
 ALLOWED_HOSTS = os.environ.get(
     'DJANGO_ALLOWED_HOSTS',
