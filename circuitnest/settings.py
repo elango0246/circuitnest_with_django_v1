@@ -83,6 +83,7 @@ WSGI_APPLICATION = 'circuitnest.wsgi.application'
 # --------------------------------------------------
 # DATABASE
 # --------------------------------------------------
+
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
 if DATABASE_URL:
@@ -101,8 +102,6 @@ else:
             "NAME": BASE_DIR / "db.sqlite3",
         }
     }
-
-
 # --------------------------------------------------
 # PASSWORD VALIDATION
 # --------------------------------------------------
