@@ -1,0 +1,23 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}{{ title }} | Circuit Nest{% endblock %}
+
+{% block extrastyle %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+{% endblock %}
+
+{% block branding %}
+    <a href="{% url 'admin:index' %}" class="admin-brand">
+        <span class="admin-brand-mark">CN</span>
+        <span>
+            <strong>Circuit Nest</strong>
+            <small>Studio control room</small>
+        </span>
+    </a>
+{% endblock %}
+
+{% block nav-global %}
+    <a class="public-site-link" href="/">View public site <span aria-hidden="true">&#8599;</span></a>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block content_title %}
+    <div class="dashboard-intro">
+        <div>
+            <p class="eyebrow">Workspace overview</p>
+            <h1>Good to see you, {{ user.get_short_name|default:user.username }}.</h1>
+            <p class="intro-copy">Keep your projects, notes, and incoming messages in rhythm.</p>
+        </div>
+        <div class="dashboard-date">Circuit Nest / Admin</div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div id="content-main" class="dashboard-content">
+        <div class="dashboard-grid">
+            {% for app in app_list %}
+                {% for model in app.models %}
+                    <section class="model-card{% if model.object_name == 'Project' %} model-card-featured{% endif %}">
+                        <div class="model-card-topline">
+                            <span class="model-icon" aria-hidden="true">
+                                {% if model.object_name == 'Project' %}&#9881;{% elif model.object_name == 'ContactMessage' %}&#9993;{% elif model.object_name == 'Category' %}&#9638;{% else %}&#9670;{% endif %}
+                            </span>
+                            <span class="model-app">{{ app.name }}</span>
+                        </div>
+                        <h2>{{ model.name }}</h2>
+                        <p class="model-description">
+                            {% if model.object_name == 'Project' %}Build and curate the work shown on your portfolio.{% elif model.object_name == 'ContactMessage' %}Review messages and keep conversations moving.{% elif model.object_name == 'Category' %}Organize your project archive into clear groups.{% else %}Maintain the tags that connect your project archive.{% endif %}
+                        </p>
+                        <div class="model-actions">
+                            {% if model.add_url %}<a class="button button-primary" href="{{ model.add_url }}">Add {{ model.name|lower }}</a>{% endif %}
+                            {% if model.admin_url %}<a class="button button-secondary" href="{{ model.admin_url }}">Manage <span aria-hidden="true">&#8594;</span></a>{% endif %}
+                        </div>
+                    </section>
+                {% endfor %}
+            {% empty %}
+                <p>{% translate "You don't have permission to edit anything." %}</p>
+            {% endfor %}
+        </div>
+
+        {% if user.is_staff %}
+            <div class="dashboard-note">
+                <span class="note-mark" aria-hidden="true">i</span>
+                <div><strong>Small details, visible impact.</strong><span>Featured projects appear first on the public homepage.</span></div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

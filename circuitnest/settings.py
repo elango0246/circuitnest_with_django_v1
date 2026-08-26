@@ -1,8 +1,16 @@
-import os
+'''import os
 from pathlib import Path
 import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
+'''
+import os
+from pathlib import Path
+from dotenv import load_dotenv
+import dj_database_url
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv(BASE_DIR / ".env")
 # --------------------------------------------------
 # SECURITY
 # --------------------------------------------------
@@ -78,12 +86,30 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'circuitnest.wsgi.application'
+'''
+DATABASES = {
+    "default": dj_database_url.config(
+        default=os.environ.get("DATABASE_URL")
+    )
+}
+
+'''
+
+DATABASES = {
+    "default": dj_database_url.config(
+        env="DATABASE_URL",
+        conn_max_age=600,
+        ssl_require=True,
+    )
+}
+
+
 
 
 # --------------------------------------------------
 # DATABASE
 # --------------------------------------------------
-
+'''
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
 if DATABASE_URL:
@@ -102,6 +128,8 @@ else:
             "NAME": BASE_DIR / "db.sqlite3",
         }
     }
+
+'''
 # --------------------------------------------------
 # PASSWORD VALIDATION
 # --------------------------------------------------
